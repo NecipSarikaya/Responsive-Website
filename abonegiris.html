@@ -1,0 +1,148 @@
+
+<!doctype html>
+<html lang="tr-TR">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Abone giriş</title>
+<link rel="stylesheet" href="abonegiris.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<script type="text/javascript" language="javascript">
+
+    var islem , kontrol;
+    
+    function ornek(){
+        islem 	=	document.getElementById("guvenlikkodualani").getContext("2d");
+        islem.fillStyle 	=	"#e6cd57";
+        degistir();
+    }
+    
+    function degistir(){
+        var metin	=	"";
+        for(var baslangic = 0; baslangic<6; baslangic++){
+            var rastgeledeger	=	Math.random();
+            if(Math.round(rastgeledeger) == 0){
+                metin 	+=	String.fromCharCode(48+9 * Math.random());
+            }else{
+                metin 	+=	String.fromCharCode(65+25 * Math.random());
+            }
+        }
+        islem.clearRect(0, 0, 150, 50);
+        islem.fillRect(0, 0, 150, 50);
+        islem.font 	=	"30px calibri";
+        islem.strokeText(metin, 24, 34);  
+        kontrol = metin ;
+    }
+    function formkontrolu(){
+        var a,b,c,d;
+        if(document.getElementById("cap").value ==""){
+            document.getElementsByName("hata")[0].innerHTML = "Captcha şifresi boş bırakılamaz!";
+            a= false;
+        }else{
+            a = true;
+            document.getElementsByName("hata")[0].innerHTML = " ";
+        }
+        if(document.getElementById("cap").value !=kontrol){
+            document.getElementsByName("hata")[0].innerHTML = "Captcha şifresini doğru giriniz!";
+            b= false;
+        }else{
+            b= true;
+            document.getElementsByName("hata")[0].innerHTML = " ";
+        }
+        if(document.getElementById("kullaniciadi").value==""){
+            document.getElementsByName("hata")[1].innerHTML = "Kullanıcı adı boş bırakılamaz";
+            c= false;
+        }
+        else{
+            c = true;
+            document.getElementsByName("hata")[1].innerHTML = " ";
+        }
+        if(document.getElementById("kullanicisifresi").value==""){
+            document.getElementsByName("hata")[2].innerHTML = "Kullanıcı şifresi boş bırakılamaz";
+            document.getElementById("kullanicisifresi").value==""
+            d= false;
+        }else{
+            d = true;
+            document.getElementsByName("hata")[2].innerHTML = " ";
+        }
+        if(a && b && c && d){
+            document.getElementById("form").submit();
+        }
+    }
+    </script>
+    <style>
+        h2{
+            font-size: 40px;
+        }
+    </style>
+</head>
+
+<body onload="ornek()">
+    
+  <div class="header">
+    <h2 class="logo"><a href="anasayfa.html" style="text-decoration: none; color: black; margin-left: 20px;">Logo</a> </h2>
+    <input type="checkbox" id="chk">
+    <label for="chk" style="margin-right: 20px;" class="show-menu-btn">
+      <i class="fas fa-ellipsis-h"></i>
+    </label>
+    <ul class="menu">
+      <a href="abonegiris.html">Blog</a>
+      <a href="#">Forum</a>
+      <a href="hakkimizda.html">Hakkımzıda</a>
+      <a href="contact.html">İletişim</a>
+      <a href="abonelikkayit.html">Kayıt Ol</a>
+      <label for="chk" class="hide-menu-btn">
+        <i class="fas fa-times"></i>
+      </label>
+    </ul>
+  </div>
+  
+    <div class="giris-page">
+        <form action="abonegiris.php" method="POST" class="giris-form" id="form">
+            <table>
+                <tr>
+                    <td colspan="3" >
+                        <h2 style="text-align:center;font-size: 60px;">Giriş Yap</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" >
+                        <div class="renk" style="text-align:center;">Güvenlik Kodu</div>
+                        <div style="text-align: center;">
+                            <canvas id="guvenlikkodualani" width="150" height="50"></canvas>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="renk" >Captcha:</td>
+                    <td><input type="text" class="textb" id="cap" name="cap" required></td>
+                    <td class="renk"></td>
+                </tr>
+                <tr>
+                    <td><div name="hata" style="color: red; text-align: center;"></div></td>
+                </tr>
+                <tr>
+                    <td class="renk" >Kullanıcı Adı:</td>
+                    <td><input  type="text"  class="textb" id="kullaniciadi" name="kullaniciadi" required ></td>
+                    <td class="renk" ></td>
+                </tr>
+                    <tr>
+                        <td><div name="hata" style="color: red; text-align: center;"></div></td>
+                    </tr>
+                <tr>
+                    <td class="renk" >Kullanıcı Şifresi:</td>
+                    <td><input type="password"  class="textb"  id="kullanicisifresi" name="kullanicisifresi" required ></td>
+                    <td class="renk" ></td>
+                </tr>
+                <tr>
+                    <td><div name="hata" style="color: red; text-align: center;"></div></td>
+                </tr>
+                <tr>
+                    <td><button class="btn" type="button" onclick="degistir()">Kodu Değiştir</button></td>
+                    <td colspan="3" style="text-align:center;"><button type="button" onclick="formkontrolu()" name="buton" class="btn">Giriş Yap</button></td>
+                </tr>
+            </table> 
+        </form>
+      </div>
+</body>
+</html>

@@ -1,0 +1,160 @@
+
+<!doctype html>
+<html lang="tr-TR">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Pembe Gömlek Kayıt</title>
+<link rel="stylesheet" href="abonekayit.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+<script type="text/javascript" language="javascript">
+    function kayitkontrol(){
+        var a,b,c,d,e;
+        if(document.getElementById("kullaniciadi").value ==""){
+            document.getElementsByName("hata")[0].innerHTML = "Kullanıcı adı boş bırakılamaz!";
+            document.kullaniciadi.focus();
+            a= false;
+        }else{
+            a = true;
+            document.getElementsByName("hata")[0].innerHTML = " ";
+        }
+        if(document.getElementById("email").value ==""){
+            document.getElementsByName("hata")[1].innerHTML = "Email adresi boş bırakılamaz!";
+            document.email.focus();
+            b= false;
+        }else{
+            b= true;
+            document.getElementsByName("hata")[1].innerHTML = " ";
+        }
+        if(document.getElementById("sifre").value==""){
+            document.getElementsByName("hata")[2].innerHTML = "Kullanıcı şifresi boş bırakılamaz";
+            document.sifre.focus();
+            c= false;
+        }
+        else{
+            c = true;
+            document.getElementsByName("hata")[2].innerHTML = " ";
+        }
+        if(document.getElementById("sifretek").value==""){
+            document.getElementsByName("hata")[3].innerHTML = "Şifre tekrarı boş bırakılamaz";
+            document.sifretek.focus();
+            document.getElementById("sifretek").value=="";
+            d= false;
+        }else{
+            d = true;
+            document.getElementsByName("hata")[3].innerHTML = " ";
+        }
+        if(document.getElementById("sifretek").value != document.getElementById("sifre").value){
+            document.getElementsByName("hata")[3].innerHTML = "Şifreler uyuşmuyor!";
+            document.sifretek.focus();
+            document.getElementById("sifretek").value=="";
+            e= false;
+        }else{
+            e = true;
+            document.getElementsByName("hata")[3].innerHTML = " ";
+        }
+        if(a && b && c && d && e){
+            document.getElementById("form").submit();
+        }
+    }
+    function validation(){
+            var form = document.getElementById("form");
+            var email = document.getElementById("email").value;
+            var text = document.getElementsByName("hata")[1];
+            var pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if(email.match(pattern)){
+                form.classList.add("valid");
+                form.classList.remove("invalid");
+                text.innerHTML ="Doğru mail adresi girdiniz";
+                text.style.color="green";
+                return true;
+            }else{
+                form.classList.remove("valid");
+                form.classList.add("invalid");
+                text.innerHTML ="Hatalı mail adresi girdiniz";
+                text.style.color="red";
+                return false;
+            }
+            if(email == " "){
+                form.classList.remove("valid");
+                form.classList.remove("invalid");
+                text.innerHTML ="";
+                text.style.color="green";
+                return false;
+            }
+            return false;
+          }
+    </script>
+    <style>
+        h2{
+            font-size: 40px;
+        }
+    </style>
+</head>
+
+<body>
+  <div class="header">
+    <h2 class="logo"><a href="anasayfa.html" style="text-decoration: none; color: black; margin-left: 20px;">Logo</a></h2>
+    <input type="checkbox" id="chk">
+    <label for="chk" style="margin-right: 20px;" class="show-menu-btn">
+      <i class="fas fa-ellipsis-h"></i>
+    </label>
+    <ul class="menu">
+      <a href="abonegiris.html">Blog</a>
+      <a href="#">Forum</a>
+      <a href="hakkimizda.html">Hakkımzıda</a>
+      <a href="contact.html">İletişim</a>
+      <a href="abonelikkayit.html">Kayıt Ol</a>
+      <label for="chk" class="hide-menu-btn">
+        <i class="fas fa-times"></i>
+      </label>
+    </ul>
+  </div>
+  
+    <div class="kayit-page">
+        <form action="abonekayit.php" method="POST" class="kayit-form" id="form" name="form">
+            <table>
+                <tr>
+                    <td colspan="3" >
+                        <h2 style="text-align:center;font-size: 60px;">Kayıt Ol</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td  >Kullanıcı Adı:</td>
+                    <td><input  placeholder="Kullanıcı adını giriniz" type="text" name="kullaniciadi"  class="textb" id="kullaniciadi" required ></td>
+                    <td class="renk" ></td>
+                </tr>
+                    <tr>
+                        <td><div name="hata" style="color: red; text-align: center;"></div></td>
+                </tr>
+                <tr>
+                        <td  >Mail adresi:</td>
+                        <td><input placeholder="Mail adresini giriniz" onkeyup="validation()" name="email" type="text" class="textb"  id="email" required></td>
+                        <td class="renk"></td>
+                    </tr>
+                    <tr>
+                        <td><div name="hata" style="color: red; text-align: center;"></div></td>
+                </tr>
+                <tr>
+                    <td >Kullanıcı Şifresi:</td>
+                    <td><input placeholder="Kullanıcı şifrenizi giriniz" name="sifre" type="password"  class="textb" id="sifre" required ></td>
+                    <td class="renk" ></td>
+                </tr>
+                <tr>
+                    <td><div name="hata" style="color: red; text-align: center;"></div></td>
+                </tr>
+                <tr>
+                    <td>Kullanici şifresi Tekrar:</td>
+                    <td><input placeholder="Kullanıcı şifrenizi tekrar giriniz" type="password" class="textb" id="sifretek" required></td>
+                </tr>
+                <tr>
+                    <td><div name="hata" style="color: red; text-align: center;"></div></td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align:center;"><button type="button" onclick="kayitkontrol()" class="btn">Kayıt Ol</button></td>
+                </tr>
+            </table> 
+        </form>
+      </div>
+</body>
+</html>
